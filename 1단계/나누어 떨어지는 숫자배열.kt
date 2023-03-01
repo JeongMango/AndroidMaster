@@ -25,7 +25,9 @@ package bw.praise.algorithmmaster
 fun main() {
 //    solution11(intArrayOf(5, 9, 7, 10), 5)
 //    solution11(intArrayOf(2, 36, 1, 3), 1)
-    solution11(intArrayOf(3, 2, 3), 10)
+//    solution11(intArrayOf(3, 2, 3), 10)
+
+    rSolution11(intArrayOf(2, 36, 1, 3), 1)
 }
 
 fun solution11(arr: IntArray, divisor: Int): IntArray {
@@ -58,7 +60,14 @@ fun solution11(arr: IntArray, divisor: Int): IntArray {
     }
 
 }
-
+//몰랐던부분
+//array += 값 <- 이렇게하면 배열에 스택처럼 뒤에 쌓인다
+//ex)
+// var array = intArrayof()
+// array += 3
+// array += 2
+// array += 1
+// array -> array{3, 2, 1}
 fun otherSolution11(arr: IntArray, divisor: Int): IntArray {
     var answer = intArrayOf()
 
@@ -68,4 +77,7 @@ fun otherSolution11(arr: IntArray, divisor: Int): IntArray {
     if (answer.size == 0) answer += -1
 
     return answer
+
 }
+
+
