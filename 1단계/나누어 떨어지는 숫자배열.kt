@@ -27,7 +27,7 @@ fun main() {
 //    solution11(intArrayOf(2, 36, 1, 3), 1)
 //    solution11(intArrayOf(3, 2, 3), 10)
 
-    rSolution11(intArrayOf(2, 36, 1, 3), 1)
+
 }
 
 fun solution11(arr: IntArray, divisor: Int): IntArray {
