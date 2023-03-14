@@ -19,14 +19,19 @@ package bw.praise.algorithmmaster
 
 
 fun main(){
-    solution20("a234")
-    solution20("1234")
+    other2Solution20("a234")
+    other2Solution20("1234")
 }
 
+//몰랐던 함수
+//isDigit 숫자인지 확인해주는 함수
 fun solution20(s: String) = (s.length == 4 || s.length == 6) && s.all{ it.isDigit() }
 
+//toIntOrNull() 문자열을 Int 숫자로 구문 분석하고 문자열이 숫자의 유효한 표현이 아닌 경우 결과 또는 null을 반환하는 함수입니다.
 fun otherSolution20(s: String) = (s.length == 4 || s.length == 6) && s.toIntOrNull() != null
 
+
+//s문자열 filter를 사용해서 숫자인지 확인후 길이를 구해서 리턴하기전에 4혹은 6인지 확인하는 방법
 fun other2Solution20(s: String): Boolean
 {
     val length = s.filter { it.isDigit() }.length
