@@ -55,8 +55,6 @@ fun solution(nums: IntArray): Int {
     return answer
 }
 
-
-
 fun isPrime(n: Int): Boolean {
     if(n<2)return false
     else if(n<6){
