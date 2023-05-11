@@ -51,3 +51,18 @@ fun otherSolution7(food: IntArray): String {
     sb.append(reversed)
     return sb.toString()
 }
+
+fun otherSolution77(food: IntArray): String {
+    val half = food
+        .onEachIndexed { index, c -> println("1: food[$index]=$c") }
+        .mapIndexed { index, amount ->
+            if (amount >= 2) {
+                (0 until (amount / 2)).toMutableList().also { it.fill(index) }
+            } else arrayListOf()
+        }
+        .flatten()
+        .fold("") { answer, amount -> answer + amount.toString() }
+
+    return half + "0" + half.reversed()
+}
+
