@@ -44,3 +44,15 @@ fun otherSolution5(a: Int, b: Int, n: Int): Int {
     return (if (n > b) n - b else 0) / (a - b) * b
 }
 
+
+fun otherSolution55(a: Int, b: Int, n: Int): Int {
+    var num = n
+    var answer = 0
+    while (num >= a) {
+        val add = (num / a) * b
+        num %= a
+        num += add
+        answer += add
+    }
+    return answer
+}
