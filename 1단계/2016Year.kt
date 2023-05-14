@@ -1,4 +1,5 @@
 package com.example.study
+
 /*
 [2016년]
 문제 설명
@@ -12,29 +13,36 @@ package com.example.study
 fun main() {
     var a = 5
     var b = 24
-    println(solution(a,b))
+    println(solution(a, b))
 }
 
 
-
-    fun solution(a: Int, b: Int): String {
-        var answer = ""
-        var sumDay = 0
-        var rest = 0
-        var dayWeek = arrayListOf<String>("FRI", "SAT", "SUN", "MON", "TUE", "WED", "THU")
-        var day = arrayListOf<Int>(0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
-        for (i in 0..a - 1) {
-            sumDay = sumDay + day[i]
-        }
-        sumDay = sumDay + b
-        if (sumDay % 7 - 1 == -1) {
-            answer = "THU"
-        } else {
-            rest = sumDay % 7 - 1
-            println(rest)
-            println("${dayWeek[rest]} 요일")
-            println(" :: ${sumDay}")
-            answer = dayWeek[rest]
-        }
-        return answer
+fun solution(a: Int, b: Int): String {
+    var answer = ""
+    var sumDay = 0
+    var rest = 0
+    var dayWeek = arrayListOf<String>("FRI", "SAT", "SUN", "MON", "TUE", "WED", "THU")
+    var day = arrayListOf<Int>(0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
+    for (i in 0..a - 1) {
+        sumDay = sumDay + day[i]
     }
+    sumDay = sumDay + b
+    if (sumDay % 7 - 1 == -1) {
+        answer = "THU"
+    } else {
+        rest = sumDay % 7 - 1
+        println(rest)
+        println("${dayWeek[rest]} 요일")
+        println(" :: ${sumDay}")
+        answer = dayWeek[rest]
+    }
+    return answer
+}
+
+fun otherSolutions(a: Int, b: Int): String {
+    var monthToDay = arrayOf(0, 0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335);
+    var charDays = arrayOf("FRI", "SAT", "SUN", "MON", "TUE", "WED", "THU");
+    var days = (b - 1 + monthToDay.get(a)) % 7;
+
+    return charDays.get(days);
+}
