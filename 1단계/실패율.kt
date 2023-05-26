@@ -48,13 +48,48 @@ fun main() {
 }
 
 
+fun solution13(N: Int, stages: IntArray): IntArray {
+    var array = stages.toMutableList()
+    var size = 0
+    val fractions = arrayListOf<Fraction>()
+    var listInt = ArrayList<Int>()
+    for (i in 1..N) {
+        var count = 0
+        for (j in 0 until array.size) {
+            size = array.size
+            if (i == array[j]) {
+                count++
+            }
+        }
+        array.removeAll { it == i }
+        fractions.add(
+            Fraction(count, size, i)
+        )
+    }
+    fractions.sortedWith(compareByDescending {
+        it.toPercent()
+    })
+    val sortedFractions = fractions.sortedWith(compareByDescending { it.toPercent() })
+    sortedFractions.forEach {
+        listInt.add(it.N)
+    }
+    println(listInt)
+    return listInt.toIntArray()
+}
+
+data class Fraction(val numerator: Int, val denominator: Int, val N: Int) {
+    fun toPercent(): Double {
+        return numerator.toDouble() / denominator * 100
+    }
+}
+//다른방법
 data class Stage(val step:Int, val failure:Double):Comparable<Stage>{
     override fun compareTo(other: Stage):Int{
         // 실패율 내림차순 정렬을 위함
         return other.failure.compareTo(this.failure)
     }
 }
-fun solution13(n: Int, stages: IntArray): IntArray {
+fun otherSolution(n: Int, stages: IntArray): IntArray {
     // 스테이지 개수만큼 배열 생성
     return Array<Stage>(n){
         // 실패 항목 카운트
@@ -65,4 +100,3 @@ fun solution13(n: Int, stages: IntArray): IntArray {
         Stage(it + 1, if(total == 0.0) 0.0 else fail / total )
     }.sorted().map{ it.step }.toIntArray()
 }
-
