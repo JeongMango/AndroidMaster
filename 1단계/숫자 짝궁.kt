@@ -57,5 +57,17 @@ fun otherSolution(X: String, Y: String): String {
     if (sameNums[0] == '0') return "0" else return sameNums
 }
 
+fun otherSolution2(X: String, Y: String): String {
+    var answer: String = ""
+
+    for (ch in (9 downTo 0).toList().map { it.toString() }) {
+        answer += ch.toString()
+            .repeat(min(X.count { it.toString() == ch }, Y.count { it.toString() == ch }))
+    }
+    if (answer.isEmpty()) answer = "-1"
+    if (answer.toList().distinct() == listOf('0')) answer = "0"
+
+    return answer
+}
 
 
