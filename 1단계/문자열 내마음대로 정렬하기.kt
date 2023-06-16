@@ -40,3 +40,10 @@ fun main() {
 fun solution25(strings: Array<String>, n: Int): Array<String> {
     return strings.sortedWith(compareBy({it[n]}, {it})).toTypedArray();
 }
+
+fun otherSolution(strings: Array<String>, n: Int): Array<String> {
+    var answer = strings
+
+    var list =  answer.sortedWith(compareBy({ it[n] }, { it }))
+    return list.toTypedArray()
+}
