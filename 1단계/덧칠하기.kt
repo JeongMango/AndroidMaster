@@ -36,6 +36,10 @@ fun main() {
 //공부할것
 //toCollection
 //LinkedList<Int>()
+//LinkedList는 삽입삭제가 빈번하거나 순회 작업이 주로 발생하는 경우 유용
+//중간에 요소를 삭제하거나 삽입하는 경우에 성능이 우수
+//ArrayList 데이터 접근이 빈번하고 요소의 순서가 중요한 경우에 데이터의 추가 조회 작업이 주로 발생하는 경우에 성능이 우수
+//크기가 고정되어 있거나 크기 변경이 빈번하지 않을경우에 적합합니다.
 fun solution16(n: Int, m: Int, section: IntArray): Int {
     val queue = LinkedList<Int>()
     var answer = 0
