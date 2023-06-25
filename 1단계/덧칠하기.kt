@@ -28,7 +28,20 @@ import java.util.*
 //4	    1	    [1, 2, 3, 4]	    4
 
 fun main() {
-    solution16(8, 4, intArrayOf(2, 3, 6))
+    val section = intArrayOf(1, 2, 3, 4)
+
+//    val test = section
+//    val queue = LinkedList<Int>()
+//    section.toCollection(queue)
+//
+//    test[0] = 5
+//    queue.add(6)
+//
+//    println(section.contentToString()) // 출력: [5, 2, 3, 4]
+//    println(test.contentToString()) // 출력: [5, 2, 3, 4]
+//    println(queue) // 출력: [1, 2, 3, 4, 6]
+//    solution16(8, 4, intArrayOf(2, 3, 6))
+    otherSolution17(8, 4, intArrayOf(2, 3, 6))
 //    solution16(5, 4, intArrayOf(1, 3))
 //    solution16(4, 1, intArrayOf(1, 2, 3, 4))
 }
@@ -40,24 +53,34 @@ fun main() {
 //중간에 요소를 삭제하거나 삽입하는 경우에 성능이 우수
 //ArrayList 데이터 접근이 빈번하고 요소의 순서가 중요한 경우에 데이터의 추가 조회 작업이 주로 발생하는 경우에 성능이 우수
 //크기가 고정되어 있거나 크기 변경이 빈번하지 않을경우에 적합합니다.
+
+//poll() 함수
+//배열에 첫번째 요소를 제거한다.
 fun solution16(n: Int, m: Int, section: IntArray): Int {
     val queue = LinkedList<Int>()
     var answer = 0
     section.toCollection(queue)
     var currentPoint = Int.MIN_VALUE
-
+//    println("currentPoint :: $currentPoint")
     while (queue.isNotEmpty()) {
         val node = queue.poll()
+        println("node :: $node")
         if (currentPoint + m - 1 < node) {
+            println("currentPoint + m - 1 :: ${currentPoint + m - 1}")
             answer++
             currentPoint = node
         }
     }
-
+    println("answer :: $answer  ")
     return answer
 }
 
-//다른사람 풀이
+//다른사람 풀이 해석
+//ArrayDeque는 양쪽 끝에서 삽입과 삭제가 모두 가능한 자료구죠 입니다.
+//1.두개의 ArrayDeque만들고 section의 첫번째 요소부터 n까지 요소를 담은 배열하나
+//section의 배열을 담은 하나
+//2.repeat을 사용해서 m만큼 dg1 첫번째 요소, dg2 첫번째 요소 를 비교해서 같으면 지우고 아니면 dg1 첫번째 요소만 제거한다.
+//3.그러고 나서 answer를 하나씩 증가시켜준다.
 fun otherSolution17(n: Int, m: Int, section: IntArray): Int {
     var answer: Int = 0
     var dq1 = ArrayDeque<Int>()
@@ -68,7 +91,6 @@ fun otherSolution17(n: Int, m: Int, section: IntArray): Int {
     section.forEach {
         dq2.add(it)
     }
-
     while(!dq2.isEmpty()){
         while(dq1.peekFirst() != dq2.peekFirst()){
             dq1.poll()
@@ -80,9 +102,9 @@ fun otherSolution17(n: Int, m: Int, section: IntArray): Int {
             } else {
                 dq1.poll()
             }
+
         }
         answer++
     }
-
     return answer
 }
