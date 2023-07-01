@@ -89,3 +89,12 @@ fun otherSolution(babbling: Array<String>): Int {
     }
     return answer
 }
+//정규식표현방법으로 풀어냄
+//array.count는 조건에 만족한만큼 개수를 반환한다.
+//it.matches String클래스에 속하는함수 문자열이 주어진 정규표현식과 일치하는지 여부검사
+//^ -> 패턴이 문자열로 시작부부관 일치해야 함
+//aya(?!aya) -> aya뒤에 또다른 aya가 오면 안되는 패턴
+//+ 앞의패턴이 최소한 한번이상 반복되는 문자열로 일치합니다.
+
+fun hardSolution(array: Array<String>) =
+    array.count { it.matches("^(aya(?!aya)|ye(?!ye)|woo(?!woo)|ma(?!ma))+$".toRegex()) }

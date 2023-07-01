@@ -1,5 +1,7 @@
 package com.example.algorizmstudy
 
+import kotlin.math.abs
+
 //[카카오 인턴] 키패드 누르기
 //
 //문제 설명
@@ -51,6 +53,7 @@ fun main() {
 //    solution(intArrayOf(1, 3, 4, 5, 8, 2, 1, 4, 5, 9, 5), "right") // "LRLLLRLLRRL"
 //    solution(intArrayOf(7, 0, 8, 2, 8, 3, 1, 5, 7, 6, 2), "left") // "LRLLRRLLLRR"
     solution(intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 0), "right") // "LLRLLRLLRL"
+//    solution(intArrayOf(2, 2, 8, 2, 9, 0), "right") // "LLRLLRLLRL"
 }
 
 //문제파악하기
@@ -61,38 +64,40 @@ fun main() {
 //클릭한 번호에 손가락 고정
 fun solution(numbers: IntArray, hand: String): String {
     var answer = ""
-    var Finger = hashMapOf<String, Int>()
-    Finger["L"] = 3
-    Finger["R"] = 4
+    var now = intArrayOf(10, 12)
     numbers.forEach {
-        println(it)
-        when (it) {
+        var number = it
+        when (number) {
             1, 4, 7 -> {
-                Finger["L"] = it
                 answer += "L"
+                now[0] = number
             }
             3, 6, 9 -> {
-                Finger["R"] = it
                 answer += "R"
+                now[1] = number
             }
             else -> {
-                if(it == 0){
-
-                }
-                var Lcount = 0
-                var Rcount = 0
-
-                if (Lcount == Rcount) {
-                    if(hand == "right"){
-                        Finger["R"] = it
+                var n = if(it == 0) 11 else it
+                var leftDistance = abs(((now[0] - n) / 3) + ((now[0] - n) % 3))
+                var rightDistance = abs(((now[1] - n) / 3) + ((now[1] - n) % 3))
+                if(rightDistance < leftDistance){
+                    answer+= "R"
+                    now[1] = n
+                }else if(rightDistance > leftDistance){
+                    answer+="L"
+                    now[0] = n
+                }else{
+                    if(hand == "left"){
+                        answer+="L"
+                        now[0] = n
                     }else{
-                        Finger["L"] = it
+                        answer+="R"
+                        now[1] = n
                     }
                 }
             }
         }
     }
-
     println(answer)
     return answer
 }
