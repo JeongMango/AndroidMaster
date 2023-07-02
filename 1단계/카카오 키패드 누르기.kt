@@ -77,21 +77,21 @@ fun solution(numbers: IntArray, hand: String): String {
                 now[1] = number
             }
             else -> {
-                var n = if(it == 0) 11 else it
+                var n = if (it == 0) 11 else it
                 var leftDistance = abs(((now[0] - n) / 3) + ((now[0] - n) % 3))
                 var rightDistance = abs(((now[1] - n) / 3) + ((now[1] - n) % 3))
-                if(rightDistance < leftDistance){
-                    answer+= "R"
+                if (rightDistance < leftDistance) {
+                    answer += "R"
                     now[1] = n
-                }else if(rightDistance > leftDistance){
-                    answer+="L"
+                } else if (rightDistance > leftDistance) {
+                    answer += "L"
                     now[0] = n
-                }else{
-                    if(hand == "left"){
-                        answer+="L"
+                } else {
+                    if (hand == "left") {
+                        answer += "L"
                         now[0] = n
-                    }else{
-                        answer+="R"
+                    } else {
+                        answer += "R"
                         now[1] = n
                     }
                 }
@@ -100,4 +100,79 @@ fun solution(numbers: IntArray, hand: String): String {
     }
     println(answer)
     return answer
+}
+
+class Solution {
+    lateinit var keypadHash: HashMap<Char, ArrayList<Int>>
+    val ROW = 0
+    val COL = 1
+
+    fun solution(numbers: IntArray, hand: String): String {
+        var answer = ""
+        var leftThumb = ArrayList<Int>(2)
+        var rightThumb = ArrayList<Int>(2)
+
+        initHash()
+        leftThumb = keypadHash['*']!!
+        rightThumb = keypadHash['#']!!
+
+        numbers.forEach {
+            val key = (it + 48).toChar()
+            when (key) {
+
+                '1', '4', '7' -> {
+                    answer += "L"
+                    leftThumb = keypadHash[key]!!
+                }
+                '3', '6', '9' -> {
+                    answer += "R"
+                    rightThumb = keypadHash[key]!!
+                }
+                '2', '5', '8', '0' -> {
+                    var stdKey = keypadHash[key]!!
+                    var leftDistance = Math.abs(stdKey[ROW] - leftThumb[ROW]) +
+                            Math.abs(stdKey[COL] - leftThumb[COL])
+                    var rightDistance = Math.abs(stdKey[ROW] - rightThumb[ROW]) +
+                            Math.abs(stdKey[COL] - rightThumb[COL])
+
+                    if (leftDistance < rightDistance) {
+                        answer += "L"
+                        leftThumb = stdKey
+                    } else if (leftDistance > rightDistance) {
+                        answer += "R"
+                        rightThumb = stdKey
+                    } else {
+                        if (hand == "right") {
+                            answer += "R"
+                            rightThumb = stdKey
+                        } else {
+                            answer += "L"
+                            leftThumb = stdKey
+                        }
+                    }
+                }
+            }
+        }
+
+        return answer
+    }
+
+    fun initHash() {
+
+        keypadHash = hashMapOf<Char, ArrayList<Int>>(
+            '1' to arrayListOf<Int>(0, 0),
+            '2' to arrayListOf<Int>(0, 1),
+            '3' to arrayListOf<Int>(0, 2),
+            '4' to arrayListOf<Int>(1, 0),
+            '5' to arrayListOf<Int>(1, 1),
+            '6' to arrayListOf<Int>(1, 2),
+            '7' to arrayListOf<Int>(2, 0),
+            '8' to arrayListOf<Int>(2, 1),
+            '9' to arrayListOf<Int>(2, 2),
+            '*' to arrayListOf<Int>(3, 0),
+            '0' to arrayListOf<Int>(3, 1),
+            '#' to arrayListOf<Int>(3, 2)
+        )
+    }
+
 }
