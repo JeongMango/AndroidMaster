@@ -41,7 +41,7 @@ fun main() {
 }
 
 //몰랐던 부분
-//.toSet()은 중복값을 제거한다
+//.toSet()은 중복값을 제거한다(subtract함수는 Collection 타입에서만 사용 할수 있기 때문에 형변환을 해줘야 한다.)
 //aArray.subtract(bArray)는 두배열에 똑같은 요소가 있으면 제거한다.
 //aArray.contains(int) aArray배열안에 int가 있는지 없는지 판별하는 bool함수
 
